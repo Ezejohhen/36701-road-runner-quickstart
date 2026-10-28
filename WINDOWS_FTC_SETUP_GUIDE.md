@@ -11,7 +11,9 @@ Kotlin and Java files into the Android app that runs on the REV Control Hub.
   requests an administrator password; do not bypass school restrictions.
 - A GitHub account if you will contribute code. Ask the coach for repository access.
 - For the final upload only: the powered Control Hub, its Wi-Fi name/password from the coach,
-  and the team's Driver Station. Never put the password into GitHub or a script.
+  and the team's Driver Station: a separate REV Driver Hub or Android phone running the
+  **FTC Driver Station** app. Its TeleOp selector is on that device, not inside IntelliJ.
+  Never put the password into GitHub or a script.
 
 Finish setup and the first build on **normal Wi-Fi**. Robot Wi-Fi usually has no internet.
 
@@ -285,7 +287,8 @@ to the Robot Controller app (this project uses **11.0**), as recommended by
 [FIRST's update guidance](https://ftc-docs.firstinspires.org/en/latest/ftc_sdk/updating/index.html).
 
 The coach completed this Hub's replacement over USB: version 11.0 started and registered
-**BioBuzz StarterBot Teleop**. Wireless uploading and Driver Station discovery still need testing.
+**BioBuzz StarterBot Teleop**. Wireless installation and app launch have also been confirmed;
+Driver Station discovery still needs checking.
 
 ### Everyday connection and upload
 
@@ -297,12 +300,16 @@ The coach completed this Hub's replacement over USB: version 11.0 started and re
    in File Explorer open the project's **tools** folder and double-click **connect-control-hub.bat**
    (Type: Windows Batch File). Keep the neighboring `.ps1` file with it.
 4. Wait for **SUCCESS: Control Hub ready**. Note the device address/serial shown.
-   Press any key to close the helper window.
+   Press any key. If the helper window stays open, close its **X**; ADB stays connected.
+   IntelliJ's bottom **Connect Control Hub** tab may remain open after the launcher finishes.
 5. Back in IntelliJ, select **TeamCode**, then select that Hub in the device dropdown
-   that previously said **No Devices**. Click the **green Run triangle**, not Debug.
+   that previously said **No Devices**. Click the **green Run triangle** or **green circular
+   Rerun arrow** immediately beside TeamCode. Both build, install, and launch the app.
+   The bug icon is Debug; the dotted connection button does not upload code.
 6. Wait until IntelliJ reports that installation/launch completed. The Driver Station may disconnect
    briefly while the Robot Controller app restarts. Do not unplug/restart during installation.
-7. On the connected Driver Station, open the **TeleOp** list and select
+7. On the **separate REV Driver Hub or Android phone**, open **FTC Driver Station** and wait
+   for it to connect. Open its **TeleOp program dropdown** and select
    **BioBuzz StarterBot Teleop** (group: **StarterBot**). A coach should supervise INIT/START.
 8. After programming, reconnect the laptop to normal Wi-Fi for GitHub and dependency downloads.
 
@@ -366,6 +373,6 @@ hardware-free tests are in `tools/test-connect-control-hub.ps1`; run with
 This does not contact the robot. The batch launcher uses a process-only execution-policy option;
 it does not change Windows' saved policy or request administrator access.
 
-**USB installation and controller startup have been verified on the team's Hub. Wireless uploading
-and Driver Station discovery still require the coach's real Hub test.** A new laptop must also
+**USB and wireless installation and controller startup have been verified on the team's Hub.
+Driver Station discovery and robot operation still need checking.** A new laptop must also
 complete its own first-build check.

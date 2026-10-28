@@ -10,15 +10,17 @@ First time on this laptop? Finish [Windows setup](WINDOWS_FTC_SETUP_GUIDE.md) fi
    network name/password from the coach. “No internet” is normal.
 4. **Click Connect Control Hub in IntelliJ's top toolbar** (the small round, dotted icon near
    **master**). Or open **File Explorer > project folder > tools** and double-click **connect-control-hub.bat**.
-5. **Look for SUCCESS: Control Hub ready.** Note the address/serial it shows. Press any key
-   to close the helper. If it fails, use the help below before clicking Run.
+5. **Look for SUCCESS: Control Hub ready.** Note the address/serial. Press any key; if the
+   helper window stays open, close its **X**. ADB stays connected. Stop if the helper failed.
 6. **Return to IntelliJ.** Wait a few seconds for the device list to refresh.
 7. **Select TeamCode** in the top Run dropdown. In the device dropdown, select the Hub
    matching the helper's address/serial. Do not choose **Current File** or the assemble-only task.
-8. **Click the green Run triangle.** This builds, installs, and opens the Robot Controller app.
+8. **Click the green Run triangle or circular Rerun arrow beside TeamCode.** Both upload and
+   open the controller app. The bug icon is Debug; the dotted button only connects ADB.
 9. **Wait for installation to finish.** The Driver Station may briefly disconnect while the app
    restarts. Do not switch networks or turn off the Hub during the upload.
-10. **On the Driver Station, select your TeleOp.** This project's program is
+10. **On the separate Driver Hub or Android phone**, open **FTC Driver Station**, then its
+    **TeleOp dropdown** (not in IntelliJ). This project's program is
     **BioBuzz StarterBot Teleop**, group **StarterBot**. Ask the coach before INIT/START.
 11. **Reconnect the laptop to normal Wi-Fi afterward** for GitHub updates and downloads.
 
@@ -39,4 +41,4 @@ not need to type ADB commands or use the Hub's pairing mode.
 
 More help: [Windows setup and troubleshooting](WINDOWS_FTC_SETUP_GUIDE.md).
 Missing the toolbar button? Add it once using **section 9** of the setup guide, or use File Explorer.
-USB installation is verified; the coach still needs to complete the wireless upload test.
+USB and wireless app installation/launch are verified; Driver Station discovery remains to be checked.
