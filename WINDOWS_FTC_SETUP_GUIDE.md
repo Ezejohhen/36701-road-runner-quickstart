@@ -213,7 +213,53 @@ Do not leave duplicate TeamCode entries.
 **Screenshot placeholder:** TeamCode's Android App settings showing the module, Default APK,
 Default Activity, and the before-launch build task; then the toolbar's TeamCode and device dropdowns.
 
-## 9. Connect and upload at the robot
+## 9. Add the Connect Control Hub button in IntelliJ
+
+This optional shortcut opens the same helper as double-clicking the batch file. Set it up
+**once on each laptop**; IntelliJ toolbar and External Tool settings do not come from GitHub.
+The coach laptop already has it. Leave **TeamCode** selected for normal uploads.
+
+### Create the connection action
+
+1. Open **File > Settings > Tools > External Tools**.
+2. If **Connect Control Hub** already exists, use that entry instead of adding a duplicate.
+   Otherwise click **+** to open **Create Tool**.
+3. Enter these values exactly. The `$ProjectFileDir$` text is an IntelliJ shortcut for the
+   open project's outer folder; keep the dollar signs and quotation marks shown below.
+
+   | Field | Value |
+   | --- | --- |
+   | Name | `Connect Control Hub` |
+   | Group | `External Tools` |
+   | Program | `C:\Windows\System32\cmd.exe` |
+   | Arguments | `/d /c start "" "$ProjectFileDir$\tools\connect-control-hub.bat"` |
+   | Working directory | `$ProjectFileDir$` |
+
+4. Click **OK** in Create Tool, then **Apply > OK** in Settings.
+   This only saves the action. Do not run it until you are ready to connect to the Hub.
+
+### Put the action on the top toolbar
+
+1. Right-click an empty area of IntelliJ's **top toolbar** and choose **Customize Toolbar...**.
+2. Expand **Main Toolbar > Left** and select **General Actions**.
+3. Click **Add...**. In the search box, type **Connect Control Hub**.
+4. Select **External Tools > External Tools > Connect Control Hub** in the results.
+   Keep **Default icon**, then click **OK**.
+5. Click **OK** again to save the toolbar layout.
+
+You should now see a **small round, dotted icon** near the branch name (usually **master**),
+to the left of the device selector. Its tooltip is **Connect Control Hub**. The exact position
+can shift when you resize IntelliJ. Click it **after joining the Hub's Wi-Fi** to open the helper
+window, then wait for **SUCCESS** before using the green TeamCode Run button.
+
+If the button is missing, the File Explorer method still works:
+open the project's `tools` folder and double-click `connect-control-hub.bat`.
+This connection button does not change Wi-Fi, upload code, or replace the TeamCode Run button.
+
+**Screenshot placeholder:** Create Tool with the five fields above, then Customize Main Toolbar
+with Connect Control Hub under General Actions, then the top toolbar with the round button marked.
+
+## 10. Connect and upload at the robot
 
 Arrange this test with the coach. Keep the robot supported safely and clear of people.
 
@@ -221,7 +267,8 @@ Arrange this test with the coach. Keep the robot supported safely and clear of p
 2. In Windows, click the taskbar network/sound area, open the Wi-Fi network list
    (**Manage Wi-Fi connections** on Windows 11), choose the **team's Control Hub network**, and click
    **Connect**. Enter its password yourself. “No internet” is expected. Stay connected.
-3. In File Explorer, open the project's **tools** folder. Double-click **connect-control-hub.bat**
+3. Click IntelliJ's **Connect Control Hub** toolbar button from section 9. Alternatively,
+   in File Explorer open the project's **tools** folder and double-click **connect-control-hub.bat**
    (Type: Windows Batch File). Keep the neighboring `.ps1` file with it.
 4. Wait for **SUCCESS: Control Hub ready**. Note the device address/serial shown.
    Press any key to close the helper window.
@@ -243,9 +290,9 @@ FIRST documents the Hub's [wireless ADB connection](https://ftc-docs.firstinspir
 The default Hub address is **192.168.43.1:5555**. If the coach has changed the robot network,
 ask for the actual address. A coach can run, from the project Terminal:
 ` .\tools\connect-control-hub.bat -HubAddress 192.168.50.1:5555 ` (replace the example address).
-Students using the normal network only need to double-click.
+Students using the normal network can use the toolbar button or double-click the helper.
 
-## 10. Download the latest team code
+## 11. Download the latest team code
 
 Do this on **normal Wi-Fi**, before switching to robot Wi-Fi.
 
