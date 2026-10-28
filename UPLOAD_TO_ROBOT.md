@@ -32,10 +32,11 @@ not need to type ADB commands or use the Hub's pairing mode.
   helper. The normal address is **192.168.43.1:5555**; ask the coach if the network changed.
 - **ADB missing, unauthorized, or offline:** Show the helper's message to the coach.
 - **Current file is not runnable:** Select **TeamCode**, then click Run again.
+- **Different signature / uninstall prompt:** Click **Cancel** and ask the coach. Do not erase the app yourself.
 - **Build/download error:** Return to normal Wi-Fi, sync/build successfully, then repeat from step 3.
 - **TeleOp missing:** Confirm installation finished on the correct Hub. Wait for the Driver
   Station to reconnect and reopen its TeleOp list. Do not start another program by guessing.
 
 More help: [Windows setup and troubleshooting](WINDOWS_FTC_SETUP_GUIDE.md).
 Missing the toolbar button? Add it once using **section 9** of the setup guide, or use File Explorer.
-The coach must complete the first physical deployment test; local builds alone do not verify it.
+USB installation is verified; the coach still needs to complete the wireless upload test.

@@ -263,6 +263,32 @@ with Connect Control Hub under General Actions, then the top toolbar with the ro
 
 Arrange this test with the coach. Keep the robot supported safely and clear of people.
 
+### First install only: a different-signature warning
+
+If IntelliJ says **Application Installation Failed** and mentions a **different signature**,
+click **Cancel** and ask the coach. Wi-Fi may already be working: this error means Android
+will not replace the installed app with one signed by a different key.
+
+The coach must back up accessible robot configurations, Blocks/OnBot Java files, and the old APK
+before approving an uninstall. Uninstalling removes private app data and can reset the Hub's
+Wi-Fi name/password. Some private settings cannot be backed up through normal ADB access.
+Use a **USB-A-to-USB-C data cable**, USB-C at the Hub, and keep the robot battery connected.
+**USB-C-to-USB-C cables do not work properly with the Control Hub.** See
+[FIRST's cable guidance](https://ftc-docs.firstinspires.org/en/latest/tech_tips/tech-tips/tech-tip-hub-tips/tech-tip-hub-tips.html).
+Do not ask a student to approve an uninstall without the coach handling backups and recovery.
+
+This is a **one-time change on the Hub**, not a change required for every laptop. The project
+uses the shared `libs/ftc.debug.keystore`; leave it unchanged. Other laptops using this repository
+then sign normal updates with the same key. Installing an official Robot Controller APK later
+may introduce a different signature again. Match the Driver Station app's major/minor version
+to the Robot Controller app (this project uses **11.0**), as recommended by
+[FIRST's update guidance](https://ftc-docs.firstinspires.org/en/latest/ftc_sdk/updating/index.html).
+
+The coach completed this Hub's replacement over USB: version 11.0 started and registered
+**BioBuzz StarterBot Teleop**. Wireless uploading and Driver Station discovery still need testing.
+
+### Everyday connection and upload
+
 1. Turn on the Hub. Finish edits and build successfully on normal Wi-Fi first.
 2. In Windows, click the taskbar network/sound area, open the Wi-Fi network list
    (**Manage Wi-Fi connections** on Windows 11), choose the **team's Control Hub network**, and click
@@ -318,6 +344,7 @@ Do not commit `local.properties`, `.idea/workspace.xml`, SDKs, APKs, passwords, 
 | Gradle sync failed | Open **View > Tool Windows > Build**, select **Sync**, and read the first error. Check internet, Java 21, and SDK location. Do not accept upgrades or delete caches as the first fix. |
 | Wrong Java / unsupported class file / JAVA_HOME invalid | Repeat section 3 and set **Gradle JVM** explicitly to Temurin 21 in section 6. Reopen IntelliJ/Terminal after installation changes. |
 | AAR metadata / compileSdk compatibility error | Use the latest team code. This repair removes unused Core KTX 1.19.1; do not add it back or change compileSdk to 37. Send the full dependency error to the coach. |
+| Installation failed: different signature | Click **Cancel** and ask the coach to follow the first-install instructions in section 10. Do not repeatedly uninstall or replace the shared signing key. |
 | Helper cannot find ADB | Install **platform-tools** in section 4. Check `local.properties`; the helper also checks ANDROID_HOME, ANDROID_SDK_ROOT, common SDK folders, and PATH. No PATH edits are needed for our normal setup. |
 | Helper connection refused/timed out | Check Hub power and the exact Wi-Fi network. Reconnect to Hub Wi-Fi and rerun. Ask the coach whether the default address changed. Do not use the Hub's pairing mode. |
 | ADB **unauthorized** | Ask a coach to approve debugging access on the Hub using the appropriate USB/REV setup. Do not reset the Hub or revoke all debugging authorizations yourself. |
@@ -339,5 +366,6 @@ hardware-free tests are in `tools/test-connect-control-hub.ps1`; run with
 This does not contact the robot. The batch launcher uses a process-only execution-policy option;
 it does not change Windows' saved policy or request administrator access.
 
-**Physical Wi-Fi connection, installation, controller restart, and Driver Station discovery still require
-the coach's real Hub test.** A new laptop must also complete its own first-build check.
+**USB installation and controller startup have been verified on the team's Hub. Wireless uploading
+and Driver Station discovery still require the coach's real Hub test.** A new laptop must also
+complete its own first-build check.
