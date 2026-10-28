@@ -47,13 +47,13 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients
 @TeleOp(name = "BioBuzz StarterBot Teleop", group = "StarterBot") //@Disabled
 class BioBuzzStarterbotTeleopCustom : OpMode() {
     // Declare OpMode members.
-    private var leftDrive: DcMotor? = null
-    private var rightDrive: DcMotor? = null
-    private var launcher: DcMotorEx? = null
-    private var intake: DcMotor? = null
-    private var leftIntakeServo: CRServo? = null
-    private var rightIntakeServo: CRServo? = null
-    private var windmillServo: CRServo? = null
+    private lateinit var leftDrive: DcMotor
+    private lateinit var rightDrive: DcMotor
+    private lateinit var launcher: DcMotorEx
+    private lateinit var intake: DcMotor
+    private lateinit var leftIntakeServo: CRServo
+    private lateinit var rightIntakeServo: CRServo
+    private lateinit var windmillServo: CRServo
 
     /*
      * These two variables are used to control the velocity of the launcher motor.
@@ -65,7 +65,7 @@ class BioBuzzStarterbotTeleopCustom : OpMode() {
      * in the launch() function to only run the windmill servo when the motor is spinning fast
      * enough to make a successful throw.
      */
-    val LAUNCHER_TARGET_VELOCITY: Int = 475
+    val LAUNCHER_TARGET_VELOCITY: Double = 475.0
     val LAUNCHER_MIN_VELOCITY: Int = 320
 
     /*
@@ -104,8 +104,8 @@ class BioBuzzStarterbotTeleopCustom : OpMode() {
          * Note: The settings here assume direct drive on left and right wheels. Gear
          * Reduction or 90 Deg drives may require direction flips
          */
-        leftDrive.setDirection(DcMotor.Direction.FORWARD)
-        rightDrive.setDirection(DcMotor.Direction.REVERSE)
+        leftDrive.setDirection(DcMotorSimple.Direction.FORWARD)
+        rightDrive.setDirection(DcMotorSimple.Direction.REVERSE)
 
         /*
          * Setting zeroPowerBehavior to BRAKE enables a "brake mode". This causes the motor to
@@ -125,14 +125,14 @@ class BioBuzzStarterbotTeleopCustom : OpMode() {
          */
         launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER)
 
-        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, PIDFCoefficients(40, 0, 0, 12.5))
+        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, PIDFCoefficients(40.0, 0.0, 0.0, 12.5))
 
         /*
          * set Feeders to an initial value to initialize the servo controller
          */
-        leftIntakeServo.setPower(0)
-        rightIntakeServo.setPower(0)
-        windmillServo.setPower(0)
+        leftIntakeServo.setPower(0.0)
+        rightIntakeServo.setPower(0.0)
+        windmillServo.setPower(0.0)
 
         /*
          * Much like our drivetrain motors, we set the right intake servo to reverse so that both
@@ -172,7 +172,7 @@ class BioBuzzStarterbotTeleopCustom : OpMode() {
          * both motors work to rotate the robot. Combinations of these inputs can be used to create
          * more complex maneuvers.
          */
-        arcadeDrive(-gamepad1.left_stick_y, gamepad1.right_stick_x)
+        arcadeDrive((-gamepad1.left_stick_y).toDouble(), gamepad1.right_stick_x.toDouble())
 
         /*
          * Set the intake power variable to equal the right trigger, minus the left trigger.
@@ -186,7 +186,7 @@ class BioBuzzStarterbotTeleopCustom : OpMode() {
          * allow us to avoid setting the same motors/servos power more than once per loop. That can
          * create erratic behavior.
          */
-        intakePower = gamepad1.right_trigger - gamepad1.left_trigger
+        intakePower = (gamepad1.right_trigger - gamepad1.left_trigger).toDouble()
 
         /*
          * The launch() function handles setting motor velocity, and running the windmill servo
@@ -241,9 +241,9 @@ class BioBuzzStarterbotTeleopCustom : OpMode() {
         if (gamepad1.right_bumper) {
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY)
         } else if (gamepad1.dpad_up) {
-            launcher.setVelocity(-600)
+            launcher.setVelocity(-600.0)
         } else {
-            launcher.setVelocity(0)
+            launcher.setVelocity(0.0)
         }
 
 
@@ -261,11 +261,11 @@ class BioBuzzStarterbotTeleopCustom : OpMode() {
             windmillServo.setPower(0);*/
         //}
         if (gamepad1.left_bumper) {
-            windmillServo.setPower(1)
+            windmillServo.setPower(1.0)
         } else if (gamepad1.dpad_down) {
-            windmillServo.setPower(-1)
+            windmillServo.setPower(-1.0)
         } else {
-            windmillServo.setPower(0)
+            windmillServo.setPower(0.0)
         }
     }
 }
