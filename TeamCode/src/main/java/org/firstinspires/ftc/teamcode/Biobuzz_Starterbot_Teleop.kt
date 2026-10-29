@@ -31,7 +31,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.PIDFCoefficients
 
 /*
- * This file includes a teleop (driver-controlled) file for the goBILDA® StarterBot for the
+ * This file includes a teleop (driver-controlled) file for the Go BILDA® StarterBot for the
  * 2026-2027 FIRST® Tech Challenge. It leverages a differential/Skid-Steer system for robot mobility,
  * one motor driving an intake roller, two servos which pull elements out of corners, and a high-speed
  * launcher motor.
@@ -44,8 +44,8 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients
  * Since the dynamics of a launcher wheel system varies greatly from those of most other FTC mechanisms,
  * we will also need to adjust the "PIDF" coefficients with some that are a better fit for our application.
  */
-@TeleOp(name = "BioBuzz StarterBot Teleop", group = "StarterBot") //@Disabled
-class BioBuzzStarterbotTeleopCustom : OpMode() {
+@TeleOp(name = "BioBuzz StarterBot Teleop Custom", group = "StarterBot") //@Disabled
+class BioBuzzStarterBotTeleopCustom : OpMode() {
     // Declare OpMode members.
     private lateinit var leftDrive: DcMotor
     private lateinit var rightDrive: DcMotor
@@ -65,7 +65,7 @@ class BioBuzzStarterbotTeleopCustom : OpMode() {
      * in the launch() function to only run the windmill servo when the motor is spinning fast
      * enough to make a successful throw.
      */
-    val LAUNCHER_TARGET_VELOCITY: Double = 475.0
+    val LAUNCHER_TARGET_VELOCITY: Double = 375.0
     val LAUNCHER_MIN_VELOCITY: Int = 320
 
     /*
@@ -117,7 +117,7 @@ class BioBuzzStarterbotTeleopCustom : OpMode() {
         intake.setZeroPowerBehavior(BRAKE)
 
         /*
-         * Here we set our launcher to the RUN_USING_ENCODER runmode.
+         * Here we set our launcher to the RUN_USING_ENCODER run mode.
          * If you notice that you have no control over the velocity of the motor, it just jumps
          * right to a number much higher than your set point, make sure that your encoders are plugged
          * into the port right beside the motor itself. And that the motors polarity is consistent
