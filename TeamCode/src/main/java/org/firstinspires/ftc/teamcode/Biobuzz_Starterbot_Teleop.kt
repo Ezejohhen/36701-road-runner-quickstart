@@ -65,7 +65,7 @@ class BioBuzzStarterBotTeleopCustom : OpMode() {
      * in the launch() function to only run the windmill servo when the motor is spinning fast
      * enough to make a successful throw.
      */
-    val LAUNCHER_TARGET_VELOCITY: Double = 375.0
+    val LAUNCHER_TARGET_VELOCITY: Double = 390.0
     val LAUNCHER_MIN_VELOCITY: Int = 320
 
     /*
