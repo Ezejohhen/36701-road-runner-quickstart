@@ -23,10 +23,10 @@ Finish setup and the first build on **normal Wi-Fi**. Robot Wi-Fi usually has no
 | --- | --- |
 | IntelliJ on the repaired laptop | IDEA 2026.1.3 with Android support |
 | Java Development Kit (JDK) | Eclipse Temurin **21**, Windows x64 JDK |
-| Gradle (downloads automatically) | **8.9**, from this repository's wrapper |
-| Android Gradle Plugin / Kotlin build plugin | **8.7.0 / 2.3.10**, already in the project |
-| Android SDK platform / Build Tools | **Android 30 / 34.0.0** |
-| FTC SDK | **11.0.0** |
+| Gradle (downloads automatically) | **8.13**, from this repository's wrapper |
+| Android Gradle Plugin / Kotlin build plugin | **8.13.2 / 2.3.10**, already in the project |
+| Android SDK platform / Build Tools | **Android 30 / 35.0.0** |
+| FTC SDK / Robot Controller app | **11.2.0 / 11.2 (version code 62)** |
 | Road Runner | core/actions **1.0.1**, FTC **0.1.25** |
 | FTC Dashboard | **0.5.1** |
 
@@ -105,7 +105,7 @@ The coach laptop already uses `C:\Android\Sdk`; that existing location also work
 6. In **Windows PowerShell**, copy and run this whole line:
 
    ```powershell
-   & "$env:LOCALAPPDATA\Android\Sdk\cmdline-tools\latest\bin\sdkmanager.bat" "--sdk_root=$env:LOCALAPPDATA\Android\Sdk" "platform-tools" "platforms;android-30" "build-tools;34.0.0"
+   & "$env:LOCALAPPDATA\Android\Sdk\cmdline-tools\latest\bin\sdkmanager.bat" "--sdk_root=$env:LOCALAPPDATA\Android\Sdk" "platform-tools" "platforms;android-30" "build-tools;35.0.0"
    ```
 
    Read the license prompts and answer `y` only if you accept them. Wait for installation to finish.
@@ -283,7 +283,7 @@ This is a **one-time change on the Hub**, not a change required for every laptop
 uses the shared `libs/ftc.debug.keystore`; leave it unchanged. Other laptops using this repository
 then sign normal updates with the same key. Installing an official Robot Controller APK later
 may introduce a different signature again. Match the Driver Station app's major/minor version
-to the Robot Controller app (this project uses **11.0**), as recommended by
+to the Robot Controller app (this project uses **11.2**), as recommended by
 [FIRST's update guidance](https://ftc-docs.firstinspires.org/en/latest/ftc_sdk/updating/index.html).
 
 The coach completed this Hub's replacement over USB: version 11.0 started and registered

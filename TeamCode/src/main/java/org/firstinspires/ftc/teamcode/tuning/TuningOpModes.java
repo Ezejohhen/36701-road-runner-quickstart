@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.tuning;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.FtcDashboard;
@@ -33,11 +35,14 @@ import com.acmerobotics.roadrunner.ftc.PinpointIMU;
 import com.acmerobotics.roadrunner.ftc.PinpointView;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.lynx.LynxModule;
+import com.qualcomm.ftccommon.FtcEventLoop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.RobotLog;
 
+import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop;
 import org.firstinspires.ftc.robotcore.external.navigation.UnnormalizedAngleUnit;
 import org.firstinspires.ftc.robotcore.internal.opmode.OpModeMeta;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
@@ -305,7 +310,26 @@ public final class TuningOpModes {
         manager.register(metaForClass(OTOSHeadingOffsetTuner.class), new OTOSHeadingOffsetTuner(dvf));
         manager.register(metaForClass(OTOSPositionOffsetTuner.class), new OTOSPositionOffsetTuner(dvf));
 
-        FtcDashboard.getInstance().withConfigRoot(configRoot -> {
+        configureDashboard();
+    }
+
+    @OnCreateEventLoop
+    public static void configureDashboardOnCreateEventLoop(Context context, FtcEventLoop eventLoop) {
+        if (DISABLED) return;
+
+        // Sloth can run the registrar before Dashboard's @OnCreate hook. Retry after
+        // activity initialization so the tuning configuration is still available.
+        if (!configureDashboard()) {
+            RobotLog.ww("TuningOpModes", "Dashboard unavailable; tuning OpModes remain registered, "
+                    + "but their Dashboard configuration could not be added.");
+        }
+    }
+
+    private static boolean configureDashboard() {
+        FtcDashboard dashboard = FtcDashboard.getInstance();
+        if (dashboard == null) return false;
+
+        dashboard.withConfigRoot(configRoot -> {
             for (Class<?> c : Arrays.asList(
                     AngularRampLogger.class,
                     ForwardRampLogger.class,
@@ -317,5 +341,6 @@ public final class TuningOpModes {
                 configRoot.putVariable(c.getSimpleName(), ReflectionConfig.createVariableFromClass(c));
             }
         });
+        return true;
     }
 }
